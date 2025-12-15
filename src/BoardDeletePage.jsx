@@ -8,7 +8,7 @@ export default function BoardDeletePage() {
   const handleDelete = () => {
     if (!window.confirm(`게시판 ${boardId}을 정말 삭제하시겠습니까?`)) return;
 
-    fetch(`http://localhost:8082/boards/${boardId}`, { method: "DELETE" })
+    fetch(`http://localhost:8082/api/boards/${boardId}`, { method: "DELETE" })
       .then(res => {
         if (res.status === 204) {
           alert("삭제 완료");

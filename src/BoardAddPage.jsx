@@ -15,8 +15,8 @@ export default function BoardCreatePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8082/boards", {
-      method: "POST",
+    fetch("http://localhost:8082/api/boards", {
+      method: "POST", 
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     })

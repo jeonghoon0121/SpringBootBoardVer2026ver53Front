@@ -1,34 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function BoardPostsPage() {
-  const { boardId } = useParams();
+  const { boardId } = useParams();   // 라우터에서 boardId 추출
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/boards/${boardId}/posts`)
-      .then(res => res.json())
-      .then(data => setPosts(data))
-      .catch(() => alert("게시글 목록 불러오기 실패"));
+    fetch(`http://localhost:8082/api/boards/${boardId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("게시글 조회 실패");
+        return res.json();
+      })
+      .then((data) => {
+        setPosts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [boardId]);
+
+  if (loading) return <p>불러오는 중...</p>;
 
   return (
     <div>
       <h2>게시판 {boardId}의 게시글 목록</h2>
-      {posts.length === 0 ? (
-        <p>게시글이 없습니다.</p>
-      ) : (
-        <ul>
-          {posts.map(post => (
-            <li key={post.postId}>
-              <strong>{post.title}</strong> - {post.author}
-              <p>{post.content}</p>
-              {/* 필요하다면 상세보기 링크 추가 */}
-              <Link to={`/posts/${post.postId}`}>상세보기</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {posts.map((post) => (
+          <li key={post.postId}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+            <p>작성자: {post.writer}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

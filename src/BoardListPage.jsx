@@ -5,7 +5,7 @@ export default function BoardListPage() {
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8082/boards")
+    fetch("http://localhost:8082/api/boards")
       .then((res) => res.json())
       .then(setBoards)
       .catch((err) => console.error("게시판 조회 실패:", err));

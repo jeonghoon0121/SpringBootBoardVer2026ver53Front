@@ -11,7 +11,7 @@ export default function BoardUpdatePage() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8082/boards/${boardId}`)
+    fetch(`http://localhost:8082/api/boards/${boardId}`)
       .then(res => res.json())
       .then(data => setForm(data));
   }, [boardId]);
@@ -23,7 +23,7 @@ export default function BoardUpdatePage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch(`http://localhost:8082/boards/${boardId}`, {
+    fetch(`http://localhost:8082/api/boards/${boardId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
