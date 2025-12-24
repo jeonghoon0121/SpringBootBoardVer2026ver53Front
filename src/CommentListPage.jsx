@@ -21,18 +21,22 @@ export default function CommentListPage() {
   }, []);
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
+    <div>
       <h1>댓글 목록</h1>
       <ul>
         {comments.map((c) => (
-          <li key={c.commentId} style={{ marginBottom: "15px" }}>
-            <strong>ID:</strong> {c.commentId} <br />
-            <strong>작성자:</strong> {c.author} <br />
-            <strong>내용:</strong> {c.content} <br />
-            <strong>게시글 ID:</strong> {c.postId}
+          <li key={c.commentId}>
+            commentId: {c.commentId} <br />
+            postId: {c.postId} <br />
+            authorId: {c.authorId} <br />
+            password: {c.password} <br />
+            content: {c.content} <br />
+            ipHash: {c.ipHash} <br />
+            createdAt: {c.createdAt} <br />
+            updatedAt: {c.updatedAt}
           </li>
         ))}
       </ul>
     </div>
   );
-}
+} 

@@ -10,26 +10,34 @@ export default function PostListPage() {
         return res.json();
       })
       .then((data) => {
-        if (Array.isArray(data)) {
-          setPosts(data);
-        } else {
-          console.error("서버 응답이 배열이 아님:", data);
-          setPosts([]);
-        }
+        if (Array.isArray(data)) setPosts(data);
+        else setPosts([]);
       })
       .catch((err) => console.error("게시글 조회 실패:", err));
   }, []);
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
+    <div>
       <h1>게시글 목록</h1>
       <ul>
         {posts.map((p) => (
-          <li key={p.postId} style={{ marginBottom: "15px" }}>
-            <strong>ID:</strong> {p.postId} <br />
-            <strong>제목:</strong> {p.title} <br />
-            <strong>내용:</strong> {p.content} <br />
-            <strong>작성자:</strong> {p.author} <br />
+          <li key={p.postId}>
+            postId: {p.postId} <br />
+            boardId: {p.boardId} <br />
+            authorId: {p.authorId} <br />
+            password: {p.password} <br />
+            ipHash: {p.ipHash} <br />
+            attachmentUrl: {p.attachmentUrl} <br />
+            title: {p.title} <br />
+            content: {p.content} <br />
+            thumbnailUrl: {p.thumbnailUrl} <br />
+            accessLevel: {p.accessLevel} <br />
+            status: {p.status} <br />
+            viewCount: {p.viewCount} <br />
+            createdAt: {p.createdAt} <br />
+            updatedAt: {p.updatedAt} <br />
+            notice: {String(p.notice)} <br />
+            secret: {String(p.secret)}
           </li>
         ))}
       </ul>
